@@ -1,0 +1,7 @@
+table{
+    border: 1px solid #dadada;
+}
+table thead th, table tbody td{
+    border: 1px solid #dadada;
+    padding: 5px 10px;
+}

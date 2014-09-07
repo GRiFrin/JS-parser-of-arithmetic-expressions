@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="address=no">
+    <title>JS algorithm examples</title>
+    <meta name="description" content="JS algorithm examples">
+    <meta name="keywords" content="JS algorithm examples">
+    <link href="styles/style.css" rel="stylesheet">
+</head>
+<body>
+    <table id="resultTable">
+        <thead>
+        <tr>
+            <th rowspan="2">Example</th>
+            <th colspan="2">Result</th>
+        </tr>
+        <tr>
+            <th>Bauer & Samelson algorithm</th>
+            <th>Reverse polish notation (with shunting yard algorithm)</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <script src="js/algorithm_core.js"></script>
+    <script src="js/algorithm_bau_sam.js"></script>
+    <script src="js/reverse_polish_notation.js"></script>
+    <script type="text/javascript">
+        var algorithms = {
+            algoBauSam: new algorithmBauSam(),
+            algoRPN:    new reversePolishNotation()
+        };
+        var examples = ['(3 + 4) * (2 / (1 - 5)) - 2', '3 / 0', '( 4 + 5 ) * 7', '2*', '3 + 4 * (2 / (1 - 5)'];
+        var j = examples.length;
+        var resultTableBody = document.getElementById('resultTable').getElementsByTagName('tbody')[0];
+        for(var i = 0; i < j; i++){
+            var example = examples[i];
+            var tr = document.createElement('tr');
+            tr.innerHTML = '<tr><td>' + example + '</td>';
+            for(var key in algorithms){
+                try{
+                    tr.innerHTML += '<td>' + algorithms[key].calculate(example) + '</td>';
+                } catch (e){
+                    tr.innerHTML += '<td>' + e.message + '</td>';
+                }
+            }
+            tr.innerHTML += '</tr>';
+            resultTableBody.appendChild(tr);
+        }
+    </script>
+</body>
+</html>
